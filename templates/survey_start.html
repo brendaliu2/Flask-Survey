@@ -12,17 +12,7 @@
   -->
   <form action="/begin" method="POST">
 
-    {% for question in questions %}
-    <div>
-      <label for={{question.question}}>{{question.question}}</label>
-      <label for={{question.question}}>Yes</label>
-      <input type="radio" name={{question.question}}
-              value={{question.choices[0]}}>
-      <label for={{question.question}}>No</label>
-      <input type="radio" name={{question.question}}
-              value={{question.choices[1]}}>
-    </div>
-    {% endfor %}
+
     <button>Start!</button>
   </form>
 
