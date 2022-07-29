@@ -28,13 +28,16 @@ def display_question():
 
 @app.get('/question/<int:index>')
 def display_single_question(index):
-    '''display question with choices depending on index'''
+    """display question with choices depending on index"""
 
     questions = survey.questions
 
     if index != len(session["responses"]):
+        flash("Tried to access wrong question! Here's the right one!")
         index = len(session["responses"])
         return redirect(f'/question/{index}')
+    elif len(session["responses"]) == len(survey.questions):
+        return redirect('/completion')
     else:
         question = questions[index]
         return render_template('question.html', question = question)
@@ -43,8 +46,8 @@ def display_single_question(index):
 
 @app.post("/answer")
 def get_response():
-    '''append response from each question to responses list
-    and redirect to next question'''
+    """append response from each question to responses list
+    and redirect to next question"""
 
     answer = request.form["answer"]
 
@@ -64,7 +67,7 @@ def get_response():
 
 @app.get('/completion')
 def show_completion():
-    '''display thank you completion page'''
+    """display thank you completion page"""
 
     return render_template('completion.html')
 
